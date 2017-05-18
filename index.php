@@ -1,7 +1,4 @@
-<?php
-/*session_start();
-$_SESSION["saludo"]="Hola Mundo";*/
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -14,8 +11,33 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+
+        <div>
+            <?php if (isset($_SESSION['USR'])) { ?>
+                <a href="cerrar.php">Cerrar Sesión</a>
+            <?php } ?>
+        </div>
+
         <a href="revision.php">Revisi&oacute;n de sesiones</a>
-        
+        <?php if (!isset($_SESSION['USR'])) { ?>
+            <form method="post" action="revision.php">
+                <div>
+                    <label>
+                        Nombre de Usuario
+                    </label>
+                    <input type="text" name="nombre">
+                </div>
+                <div>
+                    <label>
+                        Clave de Usuario
+                    </label>
+                    <input type="password" name="clave">
+                </div>
+                <input type="submit" value="Acceder">
+            </form>
+        <?php } ?>
+
+        <h1>Ejemplos de Encriptación con el #MD5</h1>
         <?php
         echo md5('#holamundo&');
         echo '<br>';
@@ -26,27 +48,6 @@ and open the template in the editor.
         echo md5('HOLAmundo');
         echo '<br>';
         ?>
-        
-        <form method="post" action="revision.php">
-            <div>
-                <label>
-                    ID de Usuario:
-                </label>
-                <input type="text" name="id">
-            </div>
-            <div>
-                <label>
-                    Nombre de Usuario
-                </label>
-                <input type="text" name="nombre">
-            </div>
-            <div>
-                <label>
-                    Clave de Usuario
-                </label>
-                <input type="password" name="clave">
-            </div>
-            <input type="submit">
-        </form>
+
     </body>
 </html>
